@@ -9,15 +9,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import HomeScreen from './src/screens/DetailScreen';
+import RootNavigation from './src/navigation';
 
 const App: () => Node = () => {
-  return (
-    <SafeAreaView>
-      <HomeScreen />
-    </SafeAreaView>
-  );
+  return <RootNavigation />;
 };
 
 export default App;

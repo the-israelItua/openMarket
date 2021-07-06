@@ -4,6 +4,7 @@ import {Picker} from '@react-native-picker/picker';
 import ProductItem from '../components/ProductItem';
 import QuantityTab from '../components/QuantityTab';
 import Button from '../components/Button';
+import ImageCarousel from '../components/ImageCarousel';
 import Product from '../../assets/data/product';
 
 const DetailsScreen = () => {
@@ -11,6 +12,7 @@ const DetailsScreen = () => {
   const [qty, setQty] = useState(1);
   return (
     <ScrollView style={styles.container}>
+      <ImageCarousel images={Product.images} />
       <Text style={styles.title}>{Product.title}</Text>
 
       <Picker

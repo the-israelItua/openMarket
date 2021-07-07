@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import ProductItem from '../components/ProductItem';
 import QuantityTab from '../components/QuantityTab';
@@ -8,6 +9,10 @@ import ImageCarousel from '../components/ImageCarousel';
 import Product from '../../assets/data/product';
 
 const DetailsScreen = () => {
+  const route = useRoute();
+
+  const productId = route.params.id;
+
   const [sel, setSel] = useState('');
   const [qty, setQty] = useState(1);
   return (

@@ -65,63 +65,7 @@ const AddressScreen = () => {
             placeholder="Enter address here"
           />
         </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <View style={styles.row}>
-          <Input
-            label="Address"
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Enter address here"
-          />
-        </View>
-        <Button text="Checkout" />
+        <Button text="Checkout" color="white" />
       </ScrollView>
     </KeyboardAvoidingView>
   );

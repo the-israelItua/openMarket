@@ -1,20 +1,15 @@
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 import 'react-native-gesture-handler';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import RootNavigation from './src/navigation';
+import Amplify from 'aws-amplify';
+import config from './src/aws-exports';
+import {withAuthenticator} from 'aws-amplify-react-native';
+
+Amplify.configure(config);
 
 const App: () => Node = () => {
   return <RootNavigation />;
 };
 
-export default App;
+export default withAuthenticator(App);

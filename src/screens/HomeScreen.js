@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, StyleSheet} from 'react-native';
+import {DataStore} from 'aws-amplify';
+import {Product} from '../models';
 import ProductItem from '../components/ProductItem';
-import Products from '../../assets/data/products';
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const results = await DataStore.query(Product);
+      setProducts(results);
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <FlatList
       style={styles.container}
-      data={Products}
+      data={products}
       renderItem={({item}) => <ProductItem item={item} />}
       showsVerticalScrollIndicator={false}
     />

@@ -34,7 +34,7 @@ const ImageCarousel = ({images}) => {
         renderItem={({item}) => (
           <Image
             style={[styles.image, {width: windowWidth}]}
-            source={{uri: item.uri}}
+            source={{uri: item}}
           />
         )}
         showsHorizontalScrollIndicator={false}
@@ -43,12 +43,13 @@ const ImageCarousel = ({images}) => {
         snapToAlignment={'center'}
         decelerationRate={'fast'}
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+        keyExtractor={({item}) => item}
       />
       <View style={styles.dotContainer}>
         {images.map((image, index) => (
           <View
             style={[styles.dot, activeIndex === index ? styles.active : {}]}
-            key={image.id}
+            key={index}
           />
         ))}
       </View>

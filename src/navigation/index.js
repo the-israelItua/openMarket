@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
+import MenuScreen from '../screens/MenuScreen';
 import Icons from 'react-native-vector-icons/AntDesign';
 import IonicIcons from 'react-native-vector-icons/Feather';
 
@@ -36,7 +37,7 @@ const RootNavigation = () => {
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Cart" component={CartStack} />
         <Tab.Screen name="Profile" component={CartStack} />
-        <Tab.Screen name="Menu" component={CartStack} />
+        <Tab.Screen name="Menu" component={MenuScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

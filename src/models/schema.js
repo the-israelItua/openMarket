@@ -134,6 +134,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "userSub": {
+                    "name": "userSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "quantity": {
                     "name": "quantity",
                     "isArray": false,
@@ -214,5 +221,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "f9e9f7b734406e45e854703de3e0e632"
+    "version": "da5c727780d351c757895e185607a0b6"
 };

@@ -15,17 +15,16 @@ const Button = ({text, onPress, style, color}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'tomato',
-    height: 55,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#a15e1b',
+    borderRadius: 4,
+    height: 50,
   },
   text: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '600',
     color: 'white',
+    lineHeight: 14,
   },
 });
 

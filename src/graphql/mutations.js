@@ -83,6 +83,7 @@ export const createCartItem = /* GraphQL */ `
   ) {
     createCartItem(input: $input, condition: $condition) {
       id
+      userSub
       quantity
       option
       productID
@@ -119,6 +120,7 @@ export const updateCartItem = /* GraphQL */ `
   ) {
     updateCartItem(input: $input, condition: $condition) {
       id
+      userSub
       quantity
       option
       productID
@@ -155,6 +157,7 @@ export const deleteCartItem = /* GraphQL */ `
   ) {
     deleteCartItem(input: $input, condition: $condition) {
       id
+      userSub
       quantity
       option
       productID

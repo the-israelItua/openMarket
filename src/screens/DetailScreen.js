@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import {DataStore, Auth} from 'aws-amplify';
 import {Product, CartItem} from '../models';
@@ -16,6 +16,7 @@ import Button from '../components/Button';
 import ImageCarousel from '../components/ImageCarousel';
 
 const DetailsScreen = () => {
+  const navigation = useNavigation();
   const route = useRoute();
 
   const productId = route.params.id;
@@ -45,14 +46,19 @@ const DetailsScreen = () => {
         productID: product.id,
       });
 
-      DataStore.save(newCartItem);
+      await DataStore.save(newCartItem);
+      navigation.navigate('Home');
     } catch (error) {
       console.log(error);
     }
   };
 
   if (!product) {
-    return <ActivityIndicator />;
+    return (
+      <View style={styles.empty}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   return (
@@ -125,6 +131,11 @@ const styles = StyleSheet.create({
     width: '48%',
     backgroundColor: '#fff',
     borderColor: 'tomato',
+  },
+  empty: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

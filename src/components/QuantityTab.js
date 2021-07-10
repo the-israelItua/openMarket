@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const QuantityTab = ({qty, setQty, onDelete = () => null}) => {
+const QuantityTab = ({qty, onChangeQty, onDelete = () => null}) => {
   const onDecrease = () => {
     if (qty === 1) {
       onDelete();
       return;
     }
-    setQty(qty - 1);
+    onChangeQty(qty - 1);
   };
 
   const onIncrease = () => {
-    setQty(qty + 1);
+    onChangeQty(qty + 1);
   };
 
   return (

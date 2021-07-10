@@ -71,6 +71,7 @@ export const onCreateCartItem = /* GraphQL */ `
   subscription OnCreateCartItem {
     onCreateCartItem {
       id
+      userSub
       quantity
       option
       productID
@@ -104,6 +105,7 @@ export const onUpdateCartItem = /* GraphQL */ `
   subscription OnUpdateCartItem {
     onUpdateCartItem {
       id
+      userSub
       quantity
       option
       productID
@@ -137,6 +139,7 @@ export const onDeleteCartItem = /* GraphQL */ `
   subscription OnDeleteCartItem {
     onDeleteCartItem {
       id
+      userSub
       quantity
       option
       productID

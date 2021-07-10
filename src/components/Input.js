@@ -12,15 +12,21 @@ const Input = props => {
 
 const styles = StyleSheet.create({
   label: {
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '400',
+    lineHeight: 20,
+    color: '#748CAD',
+    marginBottom: 4,
   },
   input: {
     borderWidth: 1,
+    borderColor: '#E4E9F2',
+    borderRadius: 4,
+    height: 46,
+    fontSize: 15,
+    fontWeight: '400',
+    lineHeight: 20,
     padding: 10,
-    fontSize: 16,
-    borderColor: 'lightgrey',
-    borderRadius: 3,
-    height: 40,
   },
 });
 

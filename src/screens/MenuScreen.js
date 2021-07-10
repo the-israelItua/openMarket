@@ -1,15 +1,19 @@
 import React from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {Auth} from 'aws-amplify';
-import ProductItem from '../components/ProductItem';
+import {useDispatch} from 'react-redux';
 import Button from '../components/Button';
-import Products from '../../assets/data/products';
+import {signOut} from '../store/actions/auth';
 
 const MenuScreen = () => {
+  const dispatch = useDispatch();
   return (
     <SafeAreaView>
       <View style={{margin: 30}}>
-        <Button text="Log Out" color="white" onPress={() => Auth.signOut()} />
+        <Button
+          text="Log Out"
+          color="white"
+          onPress={() => dispatch(signOut())}
+        />
       </View>
     </SafeAreaView>
   );

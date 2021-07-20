@@ -7,16 +7,34 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Auth} from 'aws-amplify';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch} from 'react-redux';
+import {confirmCode} from '../../store/actions/auth';
 import styles from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 const ForgotPassword = () => {
-  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [code, setCode] = useState('');
   const navigation = useNavigation();
+  const route = useRoute();
+  const userName = route.params.userName;
+  const dispatch = useDispatch();
+
+  const onConfirm = () => {
+    setLoading(true);
+    dispatch(
+      confirmCode(
+        userName,
+        code,
+        () => navigation.navigate('SignIn'),
+        () => setLoading(false),
+      ),
+    );
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -35,17 +53,17 @@ const ForgotPassword = () => {
             <View style={styles.formGroup}>
               <Input
                 label="Username"
-                value={name}
-                onChangeText={setName}
+                value={userName}
                 placeholder="Enter your username."
               />
             </View>
             <View style={styles.formGroup}>
               <Input
                 label="Confirmation Code"
-                value={name}
-                onChangeText={setName}
+                value={code}
+                onChangeText={setCode}
                 placeholder="Enter your confirmation code."
+                autoFocus
               />
             </View>
             <Pressable>

@@ -1,7 +1,7 @@
 import {authTypes} from '../types/auth';
 
 const initState = {
-  isSignedIn: false,
+  isSignedIn: true,
   userData: [],
 };
 

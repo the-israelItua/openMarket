@@ -11,6 +11,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {Auth} from 'aws-amplify';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import {useForm, Controller} from 'react-hook-form';
 import {signUp} from '../../store/actions/auth';
 import styles from './styles';
 import Input from '../../components/Input';
@@ -21,16 +23,24 @@ const screenWidth = Dimensions.get('screen').width;
 const SignUp = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [cPassword, setCPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showCPassword, setShowCPassword] = useState(false);
+
+  const {handleSubmit, control, errors, getValues} = useForm();
 
   const navigation = useNavigation();
 
-  const onSignUp = () => {
+  const onSignUp = ({username, email, password}) => {
     setLoading(true);
-    dispatch(signUp(name, email, password, () => setLoading(false)));
+    dispatch(
+      signUp(
+        username,
+        email,
+        password,
+        userName => navigation.navigate('ConfirmCode', {userName}),
+        () => setLoading(false),
+      ),
+    );
   };
 
   return (
@@ -51,44 +61,120 @@ const SignUp = () => {
           </View>
           <View style={styles.form}>
             <View style={styles.formGroup}>
-              <Input
-                label="Username"
-                value={name}
-                onChangeText={setName}
-                placeholder="Enter your preferred username."
+              <Controller
+                defaultValue=""
+                name="username"
+                control={control}
+                rules={{
+                  required: {value: true, message: 'Username is required'},
+                }}
+                render={({onChange, value}) => (
+                  <Input
+                    label="Username"
+                    value={value}
+                    onChangeText={text => onChange(text)}
+                    placeholder="Enter your preferred username."
+                    error={errors.username}
+                    errorText={errors?.username?.message}
+                  />
+                )}
               />
             </View>
             <View style={styles.formGroup}>
-              <Input
-                label="Email"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Enter your email address."
+              <Controller
+                defaultValue=""
+                name="email"
+                control={control}
+                rules={{
+                  required: {value: true, message: 'Email is required'},
+                  pattern: {
+                    value:
+                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: 'Enter a valid email.',
+                  },
+                }}
+                render={({onChange, value}) => (
+                  <Input
+                    label="Email"
+                    value={value}
+                    onChangeText={text => onChange(text)}
+                    placeholder="Enter your email."
+                    error={errors.email}
+                    errorText={errors?.email?.message}
+                  />
+                )}
               />
             </View>
             <View style={styles.formGroup}>
-              <Input
-                label="Password"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Choose your password."
+              <Controller
+                defaultValue=""
+                name="password"
+                control={control}
+                rules={{
+                  required: {value: true, message: 'Password is required'},
+                  minLength: {
+                    value: 6,
+                    message: 'Passwords should contain 6+ characters.',
+                  },
+                }}
+                render={({onChange, value}) => (
+                  <Input
+                    label="Password"
+                    secureTextEntry={!showPassword}
+                    value={value}
+                    onChangeText={text => onChange(text)}
+                    placeholder="Choose your password."
+                    error={errors.password}
+                    errorText={errors?.password?.message}
+                    icon={
+                      <FontAwesome
+                        name={!showPassword ? 'eye' : 'eye-slash'}
+                        color="#748CAD"
+                        size={24}
+                        onPress={() => setShowPassword(!showPassword)}
+                      />
+                    }
+                  />
+                )}
               />
             </View>
             <View style={styles.formGroup}>
-              <Input
-                label="Confirm Password"
-                secureTextEntry={true}
-                value={cPassword}
-                onChangeText={setCPassword}
-                placeholder="Confirm your password."
+              <Controller
+                defaultValue=""
+                name="confirmPassword"
+                control={control}
+                rules={{
+                  required: {value: true, message: 'Retype your password'},
+                  validate: value =>
+                    value === getValues('password') ||
+                    'The passwords do not match',
+                }}
+                render={({onChange, value}) => (
+                  <Input
+                    label="Confirm Password"
+                    secureTextEntry={!showCPassword}
+                    value={value}
+                    onChangeText={text => onChange(text)}
+                    placeholder="Confirm your password."
+                    error={errors.confirmPassword}
+                    errorText={errors?.confirmPassword?.message}
+                    icon={
+                      <FontAwesome
+                        name={!showCPassword ? 'eye' : 'eye-slash'}
+                        color="#748CAD"
+                        size={24}
+                        onPress={() => setShowCPassword(!showCPassword)}
+                      />
+                    }
+                  />
+                )}
               />
             </View>
             <Button
               text={loading ? 'Please wait...' : 'Sign Up'}
               color="#fff"
               style={styles.btn}
-              onPress={onSignUp}
+              onPress={handleSubmit(onSignUp)}
             />
           </View>
         </View>

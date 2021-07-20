@@ -7,8 +7,15 @@ import {
   Image,
   useWindowDimensions,
 } from 'react-native';
+import Image1 from '../../assets/Images/home1.jpeg';
+import Image2 from '../../assets/Images/home2.jpeg';
+import Image3 from '../../assets/Images/home3.png';
+import Image4 from '../../assets/Images/home5.png';
+import Image5 from '../../assets/Images/home7.jpeg';
+import Image6 from '../../assets/Images/home8.png';
+import Image7 from '../../assets/Images/home9.jpeg';
 
-const ImageCarousel = ({images}) => {
+const ImageCarousel = () => {
   const windowWidth = useWindowDimensions().width;
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -27,15 +34,14 @@ const ImageCarousel = ({images}) => {
     {viewabilityConfig, onViewableItemsChanged},
   ]);
 
+  const images = [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
+
   return (
     <View>
       <FlatList
         data={images}
         renderItem={({item}) => (
-          <Image
-            style={[styles.image, {width: windowWidth}]}
-            source={{uri: item}}
-          />
+          <Image style={[styles.image, {width: windowWidth}]} source={item} />
         )}
         showsHorizontalScrollIndicator={false}
         horizontal
@@ -59,14 +65,15 @@ const ImageCarousel = ({images}) => {
 
 const styles = StyleSheet.create({
   image: {
-    height: 250,
-    resizeMode: 'contain',
+    height: 200,
+    resizeMode: 'cover',
     marginBottom: 20,
   },
   dotContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 20,
   },
   dot: {
     width: 10,

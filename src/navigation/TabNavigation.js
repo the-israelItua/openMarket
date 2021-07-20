@@ -4,7 +4,7 @@ import HomeStack from './HomeStack';
 import CartStack from './CartStack';
 import MenuScreen from '../screens/MenuScreen';
 import Icons from 'react-native-vector-icons/AntDesign';
-import IonicIcons from 'react-native-vector-icons/Feather';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
@@ -16,13 +16,13 @@ const TabNavigation = () => {
 
           if (route.name === 'Home') {
             iconName = 'home';
+          } else if (route.name === 'Categories') {
+            iconName = 'list';
+            return <FeatherIcons name={iconName} size={size} color={color} />;
           } else if (route.name === 'Cart') {
             iconName = 'shoppingcart';
           } else if (route.name === 'Profile') {
             iconName = 'user';
-          } else if (route.name === 'Menu') {
-            iconName = 'menu';
-            return <IonicIcons name={iconName} size={size} color={color} />;
           }
           return <Icons name={iconName} size={size} color={color} />;
         },
@@ -30,12 +30,11 @@ const TabNavigation = () => {
       tabBarOptions={{
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
-        showLabel: false,
       }}>
       <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Categories" component={CartStack} />
       <Tab.Screen name="Cart" component={CartStack} />
-      <Tab.Screen name="Profile" component={CartStack} />
-      <Tab.Screen name="Menu" component={MenuScreen} />
+      <Tab.Screen name="Profile" component={MenuScreen} />
     </Tab.Navigator>
   );
 };
